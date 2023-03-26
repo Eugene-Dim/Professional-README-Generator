@@ -1,17 +1,14 @@
 {
-    "dependencies": {
-      "inquirer": "^8.2.4"
-    },
-    "name": "develop",
-    "description": "![License: Apache](https://img.shields.io/badge/license-Apache%202.0-yellow)",
-    "version": "1.0.0",
-    "main": "index.js",
-    "devDependencies": {},
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
+  "name": "static-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^6.3.1"
   }
-  
+}

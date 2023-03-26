@@ -1,102 +1,90 @@
 // TODO: Include packages needed for this application
-const inquirer = require('inquirer');
-const fs = require('fs');
-const generateMarkdown = require('./util/generateMarkdown');
+import inquirer from 'inquirer';
+  import fs from 'fs';
+  import generateMarkdown from './utils/generateMarkdown.js';
+
 
 // TODO: Create an array of questions for user input
 const questions = [
- // project title
- {
-    name: 'title',
-    type: 'input',
-    message: 'What is the title of your project?',
-  },
-  // description
-  {
-    name: 'description',
-    type: 'input',
-    message: 'Provide a short description explaining the what, why, and how of your project.',
-  },
-// installation
-  {
-    name: 'installation',
-    type: 'input',
-    message: 'Describe the installation instructions for your project.',
-  },
-// usage info
-  {
-    name: 'usage',
-    type: 'input',
-    message: 'What is the usage of your project?',
-  },
-  // contribution
-  {
-    name: 'contribution',
-    type: 'input',
-    message: 'List any collaborators of your project.',
-  },
-// test instructions
-{
-    name: 'test',
-    type: 'input',
-    message: 'Include any test you have done for your project.',
-  },
-  // license badge
-  {
-    name: 'license',
-    type: 'list',
-    message: 'Pick an appropriate license for your project.',
-    choices: [
-    'Apache',
-    'GNU GPLv3',
-    'MIT',
-    'None'],
-  },
-  // GitHub username
-  {
-    name: 'github',
-    type: 'input',
-    message: 'Please enter your GitHub username.',
-  },
-  // email
-  {
-    name: 'email',
-    type: 'input',
-    message: 'Please enter your email.',
-  },
+    {
+      type: 'input',
+      name: 'title',
+      message: 'What is the title of your project?'
+    },
+    {
+      type: 'input',
+      name: 'description',
+      message: 'Write a description for your project'
+    },
+    {
+      type: 'input',
+      name: 'installation',
+      message: 'How do you install the application?'
+    },
+    {
+      type: 'input',
+      name: 'usage',
+      message: 'How do you start this application?'
+    },
+    {
+      type: 'list',
+      name: 'license',
+      message: 'Which license does your application is covered under?',
+    },
+    {
+      type: 'input',
+      name: 'contributing',
+      message: 'Are there any contributers?'
+    },
+    {
+      type: 'input',
+      name: 'test',
+      message: 'Are there any requirements for your application to run?'
+    },
+    {
+      type: 'input',
+      name: 'github',
+      message: 'What is your GitHub username?'
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'What is your email address?'
+    }
+  ];
 
-];
 
 // TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
+async function init() {
+    try {
+      const answers = await inquirer.prompt(questions);
+      const filename = 'README.md';
+      await fs.promises.writeFile(filename, generateMarkdown(answers));
+      console.log(`Success! Your ${filename} file has been successfully generated.`);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions).then((data) => {
-        data.getLicense = getLicense(data.license)
-        fs.writeFile('generatedREADME/README.md', generateMarkdown(data), (err) => {
-            if (err) {
-                return console.log(err)
-            }
-            return console.log('README Generated!')
-        })
+        const filename = "README.md"
+
+
+        fs.writeFile(filename, generateMarkdown(data), (err) => err ? 
+        console.log(err) : console.log("Success!")
+        )
+        
     })
 }
 
-function getLicense(value){
-    switch(value) {
-        case 'Apache':
-        return '![License: Apache](https://img.shields.io/badge/license-Apache%202.0-yellow)';
- 
-        case 'GNU GPLv3':
-        return '![License: GNU GPLv3](https://img.shields.io/badge/license-GNU%20GPL-green)';
-       
-        case 'MIT':
-        return '![License: MIT](https://img.shields.io/badge/license-MIT-blue)';
- 
-        case 'None':
-        return '![License: None](https://img.shields.io/badge/license-none-orange)';        
-    }
-}
-
-init();
+// Function call to initialize app
+function initApp() {
+    
+    console.log('App initialize');
+  }
+  
+  initApp();
+  
